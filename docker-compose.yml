@@ -4,6 +4,7 @@ services:
     image: majdarbash/nginx
     volumes:
     - nfsmount:/app
+    - composer:/root/.composer
     ports:
         - 8100:8100
     links:
@@ -28,4 +29,10 @@ volumes:
     driver_opts:
       type: nfs
       o: "addr=host.docker.internal,rw"
-      device: ":${SOURCE_DIRECTORY}"
+      device: ":${APP_PATH}"
+  composer:
+      driver: local
+      driver_opts:
+        type: nfs
+        o: "addr=host.docker.internal,rw"
+        device: ":${COMPOSER_HOME}"

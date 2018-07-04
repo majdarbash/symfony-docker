@@ -9,7 +9,7 @@ Table of Contents
 
 > Build and run the containers:
 ```
-SOURCE_DIRECTORY=$PWD bash -c 'docker-compose up -d --build'
+APP_PATH=$PWD COMPOSER_HOME=$(realpath ~/)"/.composer" bash -c 'docker-compose up -d --build'
 ```
 > Create the database:
 ```
