@@ -1,0 +1,31 @@
+version: '2'
+services:
+  app:
+    image: majdarbash/nginx
+    volumes:
+    - nfsmount:/app
+    ports:
+        - 8100:8100
+    links:
+    - db:db
+    environment:
+      - XDEBUG_CONFIG="idekey=phpstorm"
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+volumes:
+  nfsmount:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: "addr=host.docker.internal,rw"
+      device: ":${SOURCE_DIRECTORY}"
